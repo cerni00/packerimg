@@ -1,14 +1,11 @@
-Write-Host "PACKER_BUILD_NAME is an env var Packer automatically sets for you."
-Write-Host "...or you can set it in your builder variables."
-Write-Host "The default for this builder is:" $Env:PACKER_BUILD_NAME
+# Install Visual Studio Code
+Invoke-WebRequest -Uri "https://go.microsoft.com/fwlink/?LinkID=620884" -OutFile "$env:TEMP\VSCodeSetup.exe"
+Start-Process -FilePath "$env:TEMP\VSCodeSetup.exe" -ArgumentList '/VERYSILENT /NORESTART /SUPPRESSMSGBOXES' -Wait
 
-Write-Host "The PowerShell provisioner will automatically escape characters"
-Write-Host "considered special to PowerShell when it encounters them in"
-Write-Host "your environment variables or in the PowerShell elevated"
-Write-Host "username/password fields."
-Write-Host "For example, VAR1 from our config is:" $Env:VAR1
-Write-Host "Likewise, VAR2 is:" $Env:VAR2
-Write-Host "VAR3 is:" $Env:VAR3
-Write-Host "Finally, VAR4 is:" $Env:VAR4
-Write-Host "None of the special characters needed escaping in the template"
+# Install .NET SDK
+Invoke-WebRequest -Uri "https://download.visualstudio.microsoft.com/download/pr/90b0cc31-08be-4b6a-8968-e7e218f3a2aa/df81c3fadb7b2b6d874515d595f91123/dotnet-sdk-3.1.412-win-x64.exe" -OutFile "$env:TEMP\dotnet-sdk.exe"
+Start-Process -FilePath "$env:TEMP\dotnet-sdk.exe" -ArgumentList '/quiet /norestart' -Wait
 
+# Clean up temporary files
+Remove-Item "$env:TEMP\VSCodeSetup.exe" -Force
+Remove-Item "$env:TEMP\dotnet-sdk.exe" -Force

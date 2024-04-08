@@ -1,5 +1,5 @@
 # Specify the path to the dotnet folder on the desktop
-$dotnetFolderPath = "C:\dotnet"
+$dotnetFolderPath = "C:\Users\Administrator\Desktop\dotnet"
 
 # Change directory to the dotnet folder
 Set-Location -Path $dotnetFolderPath
@@ -8,7 +8,7 @@ Set-Location -Path $dotnetFolderPath
 Start-Process -FilePath "dotnet" -ArgumentList "new web -n HelloWorldApp"
 
 # Set the path to the HelloWorldApp folder
-$helloWorldAppPath = "C:\dotnet\HelloWorldApp"
+$helloWorldAppPath = "C:\Users\Administrator\Desktop\dotnet\HelloWorldApp"
 
 # Change directory to the HelloWorldApp folder
 Set-Location -Path $helloWorldAppPath

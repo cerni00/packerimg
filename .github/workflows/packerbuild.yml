@@ -1,0 +1,25 @@
+name: Packer Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build_prerequisite_image:
+    runs-on: windows
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build prerequisite image
+        run: packer build -var 'region=us-east-1' -var 'instance_type=t2.micro' windows_2019.pkr.hcl
+
+  build_final_app_image:
+    runs-on: windows
+    needs: build_prerequisite_image
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build final app image
+        run: packer build -var 'region=us-east-1' -var 'instance_type=t2.micro' final_app_image.json
